@@ -1,11 +1,11 @@
 CC = gcc
 CFLAGS = -std=c89 -pedantic -Wall -Wextra -Wshadow -Wstrict-prototypes        \
-         -Wmissing-prototypes -Wconversion -Wfloat-equal -Wpointer-arith      \
+         -Wmissing-prototypes -Wfloat-equal -Wpointer-arith      \
          -Wcast-align -Wwrite-strings -Wredundant-decls -Wnested-externs      \
          -Winline -Wmissing-declarations -Wmissing-format-attribute           \
          -Wformat=2 -Wswitch-default -Wswitch-enum -Wunreachable-code         \
          -Wstrict-aliasing=2 -Wundef -Wbad-function-cast                      \
-         -g -fsanitize=address -fanalyzer                                     
+         -pg -fsanitize=address -fanalyzer                                     
 LDFLAGS = -fsanitize=address
 
 BIN_DIR = bin
