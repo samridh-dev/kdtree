@@ -81,14 +81,14 @@ dependencies.
                 KD__TYPE_F* dmin );
     ```
 
-   - 't'   : The array that holds your k-d tree (built by `kd__new`).
-   - 'n'   : Number of points in the tree.
-   - 'd'   : Depth (again, usually start at 0).
-   - 'i'   : Tree index (usually 0 for the root).
-   - 'q'   : The query point of shape `(KD__DIM)`).
-   - 'idx' : Output. After the search, *idx will hold the index of the nearest
+   - `t`   : The array that holds your k-d tree (built by `kd__new`).
+   - `n`   : Number of points in the tree.
+   - `d`   : Depth (again, usually start at 0).
+   - `i`   : Tree index (usually 0 for the root).
+   - `q`   : The query point of shape `(KD__DIM)`).
+   - `idx` : Output. After the search, *idx will hold the index of the nearest
              neighbor node in t.
-   - 'dmin': Output. After the search, *dmin will be the squared distance to
+   - `dmin`: Output. After the search, *dmin will be the squared distance to
              the nearest neighbor.
 
 
