@@ -86,7 +86,7 @@ KD__LIB void
 KD__IMPL(_new) 
         (KD__TYPE_T* const t, KD__TYPE_T* src, size_t n, size_t d, size_t i) 
 {
-
+        
         #define KD__NEW_SWAP(buf, i, j)                                       \
         do {                                                                  \
                 const size_t __n = sizeof(KD__TYPE_T) * KD__DIM;              \
@@ -118,9 +118,7 @@ KD__IMPL(_new)
 
         KD__NEW_SORT(src, n, d%KD__DIM);
 
-        t[KD__DIM*i+0] = src[KD__DIM*(n/2)+0];
-        t[KD__DIM*i+1] = src[KD__DIM*(n/2)+1];
-        t[KD__DIM*i+2] = src[KD__DIM*(n/2)+2];
+        KD__MEMCPY(t, src, sizeof(KD__TYPE_T) * KD__DIM);
 
         kd__new(t, &src[0x0000000000000], 0+(n/2+0), d+1, 2*i+1);
         kd__new(t, &src[KD__DIM*(n/2+1)], n-(n/2+1), d+1, 2*i+2);
@@ -136,7 +134,7 @@ KD__IMPL(_findnn)
          KD__TYPE_T q[KD__DIM], size_t* idx, KD__TYPE_F* dmin)
 {
 
-        #define KD__AXIS ( (d) % KD__DIM)
+        #define KD__AXIS ((d) % KD__DIM)
 
         #define KD__FINDNN_DIST(n00, n01, n02, n10, n11, n12)                 \
                 (((KD__TYPE_F)(n00) - (KD__TYPE_F)(n10)) *                    \
