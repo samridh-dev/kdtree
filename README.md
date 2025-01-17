@@ -5,7 +5,6 @@ implementation in ANSI C. It allows you to build a static k-d tree from a set
 of points and perform nearest-neighbor queries quickly, with minimal
 dependencies.
 
----
 
 ## Features
 
@@ -23,10 +22,6 @@ dependencies.
 
 5. **Comprehensive Test Suite**  
    A set of test files is also included.
-
----
-
----
 
 ## Usage
 
@@ -96,9 +91,6 @@ dependencies.
    - 'dmin': Output. After the search, *dmin will be the squared distance to
              the nearest neighbor.
 
----
-
----
 
 ## Example
 
@@ -162,11 +154,7 @@ main(void) {
 }
 ```
 
----
-
 ## Testing
 
 - `make test` builds all test files under `tests/` into `bin/tests/`.
 - `make run-tests` runs each test automatically.
-
----
