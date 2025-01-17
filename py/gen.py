@@ -64,20 +64,20 @@ static char*
 
                 do {{ /* case {CASE_INDEX}:{SUBCASE_INDEX} */
 
-                        TYPE_T q[3] = {{ {PYTHON_QUERY} }};
-                        TYPE_T nn[3] = {{ {PYTHON_NEAREST_NEIGHBOR} }};
+                        TYPE_T q[DIM]  = {{ {PYTHON_QUERY} }};
+                        TYPE_T nn[DIM] = {{ {PYTHON_NEAREST_NEIGHBOR} }};
+
+                        size_t __i;
 
                         size_t idx  = 0;
-                        float  dmin = (float)INT_MAX;
+                        TYPE_F  dmin = (TYPE_F)INT_MAX;
 
                         kd__findnn(tree, N, 0, 0, q, &idx, &dmin);
-
-                        mu_assert("case {CASE_INDEX}:{SUBCASE_INDEX} : nn[0] != ans[0]",
-                                  tree[3*idx+0] == nn[0]);
-                        mu_assert("case {CASE_INDEX}:{SUBCASE_INDEX} : nn[1] != ans[1]",
-                                  tree[3*idx+1] == nn[1]);
-                        mu_assert("case {CASE_INDEX}:{SUBCASE_INDEX} : nn[2] != ans[2]",
-                                  tree[3*idx+2] == nn[2]);
+                        
+                        for (__i = 0; __i < DIM; __i++) {{
+                                mu_assert("case {CASE_INDEX}:{SUBCASE_INDEX} : nn != ans",
+                                          tree[DIM*idx+__i] == nn[__i]);
+                        }}
 
                 }} while(0);
 
@@ -304,7 +304,7 @@ def main():
         queries = [(25, 1, 255), (70, 3, 5), (24, 88, 100)]
         plist  += generate_case(case_index=5, points=points, queries=queries, dim=3)
 
-        generate_file("tests/test_t-uchar_f-float_d-3.c", plist, md)
+        generate_file("tests/test_t-uchar_f-f32-3.c", plist, md)
 
     if 1:
         md = {
@@ -396,6 +396,97 @@ def main():
         plist += generate_case(case_index=4, points=points_4, queries=queries_4, dim=3)
 
         generate_file("tests/test_t-f64_f-f64_d-3.c", plist, md)
+
+    if 1:
+        md = {
+            "type_t": "long int",
+            "type_f": "double",
+            "dim": 6
+        }
+
+        plist = []
+
+        # Case 0
+        points = [
+            (1, 2, 3, 4, 5, 6),
+            (7, 8, 9, 10, 11, 12),
+            (13, 14, 15, 16, 17, 18),
+            (19, 20, 21, 22, 23, 24),
+            (25, 26, 27, 28, 29, 30),
+            (31, 32, 33, 34, 35, 36)
+        ]
+        queries = [
+            (37, 38, 39, 40, 41, 42),
+            (43, 44, 45, 46, 47, 48),
+            (49, 50, 51, 52, 53, 54)
+        ]
+        plist += generate_case(case_index=0, points=points, queries=queries, dim=6)
+
+        # Case 1
+        points = [
+            (100, 101, 102, 103, 104, 105),
+            (200, 201, 202, 203, 204, 205),
+            (300, 301, 302, 303, 304, 305),
+            (400, 401, 402, 403, 404, 405),
+            (500, 501, 502, 503, 504, 505),
+            (600, 601, 602, 603, 604, 605)
+        ]
+        queries = [
+            (700, 701, 702, 703, 704, 705),
+            (800, 801, 802, 803, 804, 805),
+            (900, 901, 902, 903, 904, 905)
+        ]
+        plist += generate_case(case_index=1, points=points, queries=queries, dim=6)
+
+        # Case 2
+        points = [
+            (0, 1, 2, 3, 4, 5),
+            (6, 7, 8, 9, 10, 11),
+            (12, 13, 14, 15, 16, 17),
+            (18, 19, 20, 21, 22, 23),
+            (24, 25, 26, 27, 28, 29),
+            (30, 31, 32, 33, 34, 35)
+        ]
+        queries = [
+            (36, 37, 38, 39, 40, 41),
+            (42, 43, 44, 45, 46, 47),
+            (48, 49, 50, 51, 52, 53)
+        ]
+        plist += generate_case(case_index=2, points=points, queries=queries, dim=6)
+
+        # Case 3
+        points = [
+            (10, 20, 30, 40, 50, 60),
+            (70, 80, 90, 100, 110, 120),
+            (130, 140, 150, 160, 170, 180),
+            (190, 200, 210, 220, 230, 240),
+            (250, 260, 270, 280, 290, 300),
+            (310, 320, 330, 340, 350, 360)
+        ]
+        queries = [
+            (370, 380, 390, 400, 410, 420),
+            (430, 440, 450, 460, 470, 480),
+            (490, 500, 510, 520, 530, 540)
+        ]
+        plist += generate_case(case_index=3, points=points, queries=queries, dim=6)
+
+        # Case 4
+        points = [
+            (1000, 2000, 3000, 4000, 5000, 6000),
+            (7000, 8000, 9000, 10000, 11000, 12000),
+            (13000, 14000, 15000, 16000, 17000, 18000),
+            (19000, 20000, 21000, 22000, 23000, 24000),
+            (25000, 26000, 27000, 28000, 29000, 30000),
+            (31000, 32000, 33000, 34000, 35000, 36000)
+        ]
+        queries = [
+            (37000, 38000, 39000, 40000, 41000, 42000),
+            (43000, 44000, 45000, 46000, 47000, 48000),
+            (49000, 50000, 51000, 52000, 53000, 54000)
+        ]
+        plist += generate_case(case_index=4, points=points, queries=queries, dim=6)
+
+        generate_file("tests/test_t-i64_f-f64_d-6.c", plist, md)
 
 if __name__ == "__main__":
     main()
