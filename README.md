@@ -98,8 +98,15 @@ Below is a simplified usage example that builds a 3D tree of unsigned char
 points and then queries for the nearest neighbor:
 
 ```c
+
 #include <stdio.h>
+#include <stdlib.h>
 #include <limits.h>
+
+
+/* override inbuilt memcpy */
+#include <string.h>
+#define KD__MEMCPY__OVERRIDE memcpy
 
 #define KD__TYPE_T unsigned char
 #define KD__TYPE_F float
